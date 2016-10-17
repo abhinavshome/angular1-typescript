@@ -1,0 +1,52 @@
+<html ng-app="booksCart">
+
+<head>
+	<title>Angular Training</title>
+	<script src="vendor/system.js"></script>
+	<script src="vendor/typescript.min.js"></script>
+	<style>
+		.ng-cloak {
+			display: none !important;
+		}
+		.loading {
+			display: none;
+		}
+		.loading.ng-cloak {
+			display: block !important;
+		}
+
+	</style>
+	<script>
+		System.config({
+			transpiler: 'typescript',
+			packages: {
+				src: {
+					defaultExtension: 'ts'
+				}
+			} 
+		});
+		System
+			.import('app.ts')
+			.then(null, console.error.bind(console));
+	</script>
+</head>
+
+<body>
+	<div class="loading ng-cloak">Loading..</div>
+	<div class="ng-cloak">
+		<h1>My first angular app</h1>
+
+		<div ng-controller="BookCtrl as ctrl">
+			<div>
+				<div><b>{{ctrl.book.title}}</b></div>
+				<div><i>{{ctrl.book.author}}</i></div>
+				<div>{{ctrl.book.price}}</div>
+				<div>{{ctrl.book.rating}}</div>
+				<hr/>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
