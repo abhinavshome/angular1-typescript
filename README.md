@@ -8,6 +8,8 @@ Install this one time on your machine. This will install a command line called h
 > npm install -g http-server
 
 
+The go to individual folders and run http-server
+
 > cd 1-controllers
 
 > http-server
