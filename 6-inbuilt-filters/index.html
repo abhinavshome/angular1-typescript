@@ -1,0 +1,120 @@
+<html ng-app="booksCart">
+
+<head>
+    <title>Angular Training</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="vendor/system.js"></script>
+    <script src="vendor/typescript.min.js"></script>
+    <script>
+    System.config({
+        transpiler: 'typescript',
+        packages: {
+          src: {
+            defaultExtension: 'ts'
+          }
+        } 
+    });
+    System
+        .import('app.ts')
+        .then(null, console.error.bind(console));
+    </script>
+</head>
+
+<body>
+    <h1>My first angular app</h1>
+    <div ng-controller="BookCtrl as ctrl">
+        <div>
+            <h3>Add a book</h3>
+            <form ng-submit="ctrl.addBook()">
+                <div>
+                    <label>Title</label>
+                    <input type="text" ng-model="ctrl.newBook.title" />
+                </div>
+                <div>
+                    <label>Author</label>
+                    <input type="text" ng-model="ctrl.newBook.author" />
+                </div>
+                <div>
+                    <label>Price</label>
+                    <input type="text" ng-model="ctrl.newBook.price" />
+                </div>
+                <div>
+                    <label>Rating</label>
+                    <select ng-model="ctrl.newBook.rating">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>Item</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                </tr>
+                <tr ng-repeat="item in ctrl.cart.items">
+                    <td>{{item.name}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.qty}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Price</td>
+                    <td>{{ctrl.cart.totalPrice}}</td>
+                </tr>
+            </table>
+        </div>
+        <hr/>
+        <div>
+            <label>Show</label>
+            <a ng-class="{active:showBooks==2}" ng-click="showBooks=2">2</a> |
+            <a ng-class="{active:showBooks==books.length}" ng-click="showBooks=books.length">All</a>
+        </div>
+        <div>
+            <label>Sort by</label>
+            <a ng-class="{active:sortOrder=='title'}" ng-click="sortOrder='title'">Title</a> |
+            <a ng-class="{active:sortOrder=='price'}" ng-click="sortOrder='price'">Price &uarr;</a> |
+            <a ng-class="{active:sortOrder=='-price'}" ng-click="sortOrder='-price'">Price &darr;</a> |
+            <a ng-class="{active:sortOrder=='rating'}" ng-click="sortOrder='rating'">Rating</a>
+        </div>
+        <div>
+            <label>Text:</label>
+            <input type="text" ng-model="filterText"/>
+        </div>
+        <div>
+            <label>Fields:</label>
+            <input type="text" ng-model="filterObj.title" placeholder="Title">
+            <input type="text" ng-model="filterObj.author" placeholder="Author">
+        </div>
+        <div>
+            <label>Functions:</label>
+            <button ng-class="{active:filterFun==ctrl.highRated}" ng-click="filterFun=ctrl.highRated">high rated</button>
+            <button ng-class="{active:filterFun==ctrl.cheap}" ng-click="filterFun=ctrl.cheap">cheap</button>
+            <button ng-class="{active:filterFun==ctrl.all}" ng-click="filterFun=ctrl.all">all</button>
+        </div>
+        <div 
+            ng-repeat="book in ctrl.books | limitTo:showBooks | orderBy:sortOrder | filter:filterText | filter:filterObj | filter:filterFun" 
+            ng-class="{high: book.rating > 3, low: book.rating <= 3}" 
+            class="book">
+            <div><b>{{book.title}}</b></div>
+            <div><i>{{book.author}}</i></div>
+            <div>{{book.price}}</div>
+            <div>{{book.rating}}</div>
+            <hr/>
+            <button ng-click="ctrl.rateUp(book)">&uarr;</button>
+            <button ng-click="ctrl.rateDown(book)">&darr;</button>
+            <button ng-click="ctrl.addToCart(book)">
+                <img src="cart.png" />
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

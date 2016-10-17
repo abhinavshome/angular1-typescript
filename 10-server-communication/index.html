@@ -1,0 +1,37 @@
+<html ng-app="booksCart">
+
+<head>
+    <title>Angular Training</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="vendor/system.js"></script>
+    <script src="vendor/typescript.min.js"></script>
+    <script>
+    System.config({
+        transpiler: 'typescript',
+        packages: {
+          src: {
+            defaultExtension: 'ts'
+          }
+        } 
+    });
+    System
+        .import('src/app.ts')
+        .then(null, console.error.bind(console));
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h2>BooksCart</h2>
+        <div ng-controller="MenuCtrl as ctrl">
+            <a ng-class="{active: ctrl.isCurrent('/')}" href="#/">Home</a> |
+            <a ng-class="{active: ctrl.isCurrent('/about')}" href="#/about">About</a> |
+            <a ng-class="{active: ctrl.isCurrent('/new-book')}" href="#/new-book">Add Book</a> |
+            <a ng-class="{active: ctrl.isCurrent('/cart')}" href="#/cart">Cart</a> |
+            <a ng-class="{active: ctrl.isCurrent('/top-books')}" href="#/top-books">Top Books</a>
+        </div>
+    </div>
+    <ng-view></ng-view>
+</body>
+
+</html>

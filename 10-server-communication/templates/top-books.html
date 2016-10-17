@@ -1,0 +1,16 @@
+<h2>Best 100 Books</h2>
+<table>
+    <tr>
+        <td>Title</td>
+        <td>Author</td>
+        <td>Year</td>
+        <td>Country</td>
+    </tr>
+    <tr ng-repeat="book in ctrl.topBooks | limitTo:100">
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.year}}</td>
+        <td>{{book.country}}</td>
+    </tr>
+
+</table>
