@@ -44,7 +44,7 @@ export default class BookCtrl {
         if (item) {
             item.qty++;
         } else {
-            var item = {
+            item = {
                 name: book.title,
                 price: book.price,
                 qty: 1

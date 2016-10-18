@@ -1,0 +1,28 @@
+<html ng-app="heroApp">
+
+<head>
+    <title>Angular Training</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="vendor/system.js"></script>
+    <script src="vendor/typescript.min.js"></script>
+    <script>
+    System.config({
+        transpiler: 'typescript',
+        packages: {
+          src: {
+            defaultExtension: 'ts'
+          }
+        } 
+    });
+    System
+        .import('src/app.ts')
+        .then(null, console.error.bind(console));
+    </script>
+</head>
+
+<body>
+    <menu></menu>
+    <ng-view></ng-view>
+</body>
+
+</html>

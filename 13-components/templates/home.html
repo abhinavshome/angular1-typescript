@@ -1,0 +1,40 @@
+<div>
+	<label>Show</label>
+	<a ng-class="{active:showBooks==2}" ng-click="showBooks=2">2</a> |
+	<a ng-class="{active:showBooks==books.length}" ng-click="showBooks=books.length">All</a>
+</div>
+<div>
+	<label>Sort by</label>
+	<a ng-class="{active:sortOrder=='title'}" ng-click="sortOrder='title'">Title</a> |
+	<a ng-class="{active:sortOrder=='price'}" ng-click="sortOrder='price'">Price &uarr;</a> |
+	<a ng-class="{active:sortOrder=='-price'}" ng-click="sortOrder='-price'">Price &darr;</a> |
+	<a ng-class="{active:sortOrder=='rating'}" ng-click="sortOrder='rating'">Rating</a>
+</div>
+<div>
+	<label>Text:</label>
+	<input type="text" ng-model="filterText" />
+</div>
+<div>
+	<label>Fields:</label>
+	<input type="text" ng-model="filterObj.title" placeholder="Title">
+	<input type="text" ng-model="filterObj.author" placeholder="Author">
+</div>
+<div>
+	<label>Functions:</label>
+	<button ng-class="{active:filterFun==ctrl.highRated}" ng-click="filterFun=ctrl.highRated">high rated</button>
+	<button ng-class="{active:filterFun==ctrl.cheap}" ng-click="filterFun=ctrl.cheap">cheap</button>
+	<button ng-class="{active:filterFun==ctrl.all}" ng-click="filterFun=ctrl.all">all</button>
+</div>
+<div ng-repeat="book in ctrl.books | limitTo:showBooks | orderBy:sortOrder | filter:filterText | filter:filterObj | filter:filterFun"
+	ng-class="{high: book.rating > 3, low: book.rating <= 3}" class="book">
+	<div><b>{{book.title}}</b></div>
+	<div><i>{{book.author}}</i></div>
+	<div>{{book.price}}</div>
+	<div>{{book.rating}}</div>
+	<hr/>
+	<button ng-click="ctrl.rateUp(book)">&uarr;</button>
+	<button ng-click="ctrl.rateDown(book)">&darr;</button>
+	<button ng-click="ctrl.addToCart(book)">
+                <img src="cart.png" />
+            </button>
+</div>
